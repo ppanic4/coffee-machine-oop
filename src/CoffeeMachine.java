@@ -72,6 +72,8 @@ public class CoffeeMachine {
         return tempMoney;
     }
 
+    // Save state
+
     public void saveState() {
         File file = new File(filePath);
 
