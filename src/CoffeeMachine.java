@@ -45,11 +45,10 @@ public class CoffeeMachine {
 
     // Fill the machine method
 
-    public void fillMachine(int water, int milk, int coffeeBeans, double money, int cups) {
+    public void fillMachine(int water, int milk, int coffeeBeans, int cups) {
         this.currentWater = this.currentWater + water;
         this.currentMilk = this.currentMilk + milk;
         this.currentCoffeeBeans = this.currentCoffeeBeans + coffeeBeans;
-        this.currentMoney = this.currentMoney + money;
         this.currentCups = this.currentCups + cups;
     }
 
