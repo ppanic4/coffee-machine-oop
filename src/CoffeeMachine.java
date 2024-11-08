@@ -20,47 +20,55 @@ public class CoffeeMachine {
 // Check remaining resources method
 
     public String checkResources(CoffeeCupType coffeeCupType) {
+        String missingResources = "";
+
         if (currentWater < coffeeCupType.getWater()) {
-            return "Not enough water";
-        } else if (currentMilk < coffeeCupType.getMilk()) {
-            return "Not enough milk";
-        } else if (currentCoffeeBeans < coffeeCupType.getCoffeeBeans()) {
-            return "Not enough coffee beans";
-        } else if (currentCups < 1) {
-            return "Not enough cups";
+            missingResources += "Not enough water\n";
+        }
+        if (currentMilk < coffeeCupType.getMilk()) {
+            missingResources += "Not enough milk\n";
+        }
+        if (currentCoffeeBeans < coffeeCupType.getCoffeeBeans()) {
+            missingResources += "Not enough coffee beans\n";
+        }
+        if (currentCups < 1) {
+            missingResources += "Not enough cups\n";
+        }
+        if (missingResources.isEmpty()) {
+            return null; // Nema nedostataka
         } else {
-            return null;
+            return missingResources.trim();
         }
     }
 
     // Buy coffee method
 
     public void buyCoffee(CoffeeCupType coffeeCupType) {
-        this.currentWater = this.currentWater - coffeeCupType.getWater();
-        this.currentMilk = this.currentMilk - coffeeCupType.getMilk();
-        this.currentCoffeeBeans = this.currentCoffeeBeans - coffeeCupType.getCoffeeBeans();
-        this.currentMoney = this.currentMoney - coffeeCupType.getCost();
-        this.currentCups = this.currentCups - 1;
+        currentWater = currentWater - coffeeCupType.getWater();
+        currentMilk = currentMilk - coffeeCupType.getMilk();
+        currentCoffeeBeans = currentCoffeeBeans - coffeeCupType.getCoffeeBeans();
+        currentMoney = currentMoney - coffeeCupType.getCost();
+        currentCups = currentCups - 1;
     }
 
     // Fill the machine method
 
     public void fillMachine(int water, int milk, int coffeeBeans, int cups) {
-        this.currentWater = this.currentWater + water;
-        this.currentMilk = this.currentMilk + milk;
-        this.currentCoffeeBeans = this.currentCoffeeBeans + coffeeBeans;
-        this.currentCups = this.currentCups + cups;
+        currentWater = currentWater + water;
+        currentMilk = currentMilk + milk;
+        currentCoffeeBeans = currentCoffeeBeans + coffeeBeans;
+        currentCups = currentCups + cups;
     }
 
     //Display machine status
 
     public String checkRemaining() {
         return "The coffee machine has:\n" +
-                getCurrentWater() + " ml of water\n" +
-                getCurrentMilk() + " ml of milk\n" +
-                getCurrentCoffeeBeans() + " g of coffee beans\n" +
-                getCurrentCups() + " disposable cups\n" +
-                "$" + getCurrentMoney() + " of money\n";
+                currentWater + " ml of water\n" +
+                currentMilk + " ml of milk\n" +
+                currentCoffeeBeans + " g of coffee beans\n" +
+                currentCups + " disposable cups\n" +
+                "$" + currentMoney + " of money\n";
     }
 
     //Take money
@@ -71,15 +79,13 @@ public class CoffeeMachine {
         return tempMoney;
     }
 
-    // Save state
-
     public void saveState() {
         File file = new File(filePath);
 
         try (FileWriter writer = new FileWriter(file)) {
-            writer.write(getCurrentWater() + "; " + getCurrentMilk() + "; " + getCurrentCoffeeBeans() + "; " +
-                    getCurrentCups() + "; " + getCurrentMoney() + "\n");
-            writer.write(getAdminUsername() + "; " + getAdminPassword() + "\n");
+            writer.write(currentWater + "; " + currentMilk + "; " + currentCoffeeBeans + "; " +
+                    currentCups + "; " + currentMoney + "\n");
+            writer.write(adminUsername + "; " + adminPassword + "\n");
         } catch (IOException e) {
             System.out.println("An error occurred while saving the machine state: " + e.getMessage());
         }
