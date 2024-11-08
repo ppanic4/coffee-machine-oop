@@ -75,7 +75,7 @@ public class CoffeeUI {
                                 System.out.print("Write how many disposable cups you want to add: ");
                                 int addedCups = scanner.nextInt();
 
-                                coffeeMachine.fillMachine(addedWater, addedMilk, addedCoffeeBeans, 0, addedCups);
+                                coffeeMachine.fillMachine(addedWater, addedMilk, addedCoffeeBeans, addedCups);
                                 System.out.println("Machine refilled.");
                                 break;
 
